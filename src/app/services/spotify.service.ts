@@ -7,7 +7,7 @@ import Spotify from 'spotify-web-api-js';
 })
 export class SpotifyService {
 
-  spotify: Spotify.SpotifyWebApiJs;
+  spotify: Spotify.SpotifyWebApiJs = null;
 
   constructor() { }
 
@@ -21,8 +21,9 @@ export class SpotifyService {
 
   verificarTokenUrlCallback() {
     const token = this.obterTokenUrlCallback();
-    this.definirAccessToken(token);
-    console.log(token);
+    if(!!token) {
+      this.definirAccessToken(token);
+    }
   }
 
   obterUrlLogin() {
@@ -38,6 +39,7 @@ export class SpotifyService {
   definirAccessToken(token: string) {
     this.spotify?.setAccessToken(token);
     localStorage.setItem('token', token);
+    console.log(token);
     this.spotify?.skipToNext();
   }
 }
