@@ -7,11 +7,11 @@ import Spotify from 'spotify-web-api-js';
 })
 export class SpotifyService {
 
-  spotify: Spotify.SpotifyWebApiJs = null;
+  spotify: Spotify.SpotifyWebApiJs = new Spotify();
 
   constructor() { }
 
-  obterTokenUrlCallback() {
+  public obterTokenUrlCallback() {
     if (!window.location.hash) return '';
 
     const params = window.location.href.substring(1).split('&');
@@ -19,14 +19,14 @@ export class SpotifyService {
     return token;
   }
 
-  verificarTokenUrlCallback() {
+  private verificarTokenUrlCallback() {
     const token = this.obterTokenUrlCallback();
     if(!!token) {
       this.definirAccessToken(token);
     }
   }
 
-  obterUrlLogin() {
+  public obterUrlLogin() {
     const authEndPoint = `${SpotifyConfiguration.authEndpoint}?`;
     const clientId = `client_id=${SpotifyConfiguration.clientId}&`;
     const redirectUrl = `redirect_uri=${SpotifyConfiguration.redirectUrl}&`;
@@ -36,10 +36,21 @@ export class SpotifyService {
     return authEndPoint + clientId + redirectUrl + scopes + responseType;
   }
 
-  definirAccessToken(token: string) {
+  public definirAccessToken(token: string) {
     this.spotify?.setAccessToken(token);
     localStorage.setItem('token', token);
     console.log(token);
     this.spotify?.skipToNext();
+    this.getElvis();
+  }
+
+  getElvis() {
+    const teste = this.spotify.getAccessToken();
+    console.log(teste);
+    //  .getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE', function (err: any, data: any) {
+    //   if (err) console.error(err);
+    //   else console.log('Artist albums', data);
+    // });
+    
   }
 }

@@ -25,3 +25,21 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+
+
+## Aula 02 
+
+Inicia com a inclusão da página de Login. Aqui ainda cria-se o módulo num arquivo separado, sendo que as novas versões de Angular podem ser colocados no próprio componente com standalone, mas nessa versão que foi ensinada o recurso não existia.
+
+Após a criação do módulo de Login, foi necessário declará-lo no App.Module.Ts, e com isso a aplicação  mapeia esse módulo e consegue administrá-lo.
+
+Essa estratégia de termos o modulo é que somente será carregado se ouver necessidade para instanciar o componente de login.
+
+Na criação das rotas do angular, a rota principal esta no app.routes.ts, e as subrotas ficam em cada extensão da rota principal. Assim, o app.module tem o AppRotas, no caso somente carregando o LoginModule, e no LoginModule, temos as subrotas do loginmodule, com o LoginRotas.
+
+Finalmente para todas as rotas funcionarem, em app.component.html precisamos colocar a tag de
+<router-outlet> e seus imports
+
+
