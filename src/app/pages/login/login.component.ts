@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from 'src/app/services/spotify.service';
 
 @Component({
@@ -6,9 +6,21 @@ import { SpotifyService } from 'src/app/services/spotify.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   constructor(private spotifyService: SpotifyService) { }
+
+  ngOnInit(): void {
+    this.verificarTokenUrlCallback();
+  }
+
+  verificarTokenUrlCallback() {
+    const token = this.spotifyService.obterTokenUrlCallback();
+    console.log(token);
+    if(!!token) {
+      this.spotifyService.definirAccessToken(token);
+    }
+  }
 
   abrirPaginaLogin() {
     window.location.href = this.spotifyService.obterUrlLogin();
