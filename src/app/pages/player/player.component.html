@@ -1,1 +1,8 @@
 <p>player works!</p>
+
+<div>
+  <input type="text" [(ngModel)]="colorInput" placeholder="Digite uma cor em hexadecimal">
+  <button (click)="changeBackgroundColor()">Alterar cor de fundo</button>
+</div>
+
+<div [style.background-color]="backgroundColor" style="width: 200px; height: 200px;"></div>
