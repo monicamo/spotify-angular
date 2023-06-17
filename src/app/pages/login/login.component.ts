@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { SpotifyService } from 'src/app/services/spotify.service';
+import { Component, OnInit } from "@angular/core";
+import { SpotifyService } from "src/app/services/spotify.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
-
-  constructor(private spotifyService: SpotifyService) { }
+  constructor(private spotifyService: SpotifyService) {}
 
   ngOnInit(): void {
     this.verificarTokenUrlCallback();
@@ -17,11 +16,11 @@ export class LoginComponent implements OnInit {
   private verificarTokenUrlCallback() {
     const token = this.spotifyService.obterTokenUrlCallback();
 
-    if(!!token) {
+    if (!!token) {
       this.spotifyService.definirAccessToken(token);
-      console.log('pegou token de acesso da spotify');
+      console.log("pegou token de acesso da spotify");
     } else {
-      console.log('nao rolou');
+      console.log("nao rolou");
     }
   }
 
