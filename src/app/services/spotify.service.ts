@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import { SpotifyConfiguration } from "src/environments/environment";
 import Spotify from "spotify-web-api-js";
 import { IUsuario } from "../pages/interfaces/iusuario";
-import { SpotifyUserParaUsuario } from "../common/spotify-helper";
+import { SpotifyPlaylistParaPlaylist, SpotifyUserParaUsuario } from "../common/spotify-helper";
+import { IPlaylist } from "../pages/interfaces/iplaylist";
 
 @Injectable({
   providedIn: "root",
@@ -78,6 +79,12 @@ export class SpotifyService {
       ?.skipToNext()
       .then((x) => console.log(x))
       .catch((err) => console.log(err));
+  }
+
+  async buscarPlaylistUsuario(offset = 0, limit: 30): Promise<IPlaylist[]> {
+    const playlists = await this .spotify.getUserPlaylists( this.usuario.id, { offset, limit } );
+    // return playlists.items.map(x => SpotifyPlaylistParaPlaylist(x));
+    return playlists.items.map(SpotifyPlaylistParaPlaylist);
   }
 
   // nao usado ainda
