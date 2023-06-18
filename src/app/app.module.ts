@@ -7,7 +7,7 @@ import { RouterModule } from "@angular/router";
 import { AppRotas } from "./app.routes";
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { firebaseConfig } from '../firebase-config';
+import { firebaseConfig } from './firebase-config';
 
 @NgModule({
   declarations: [AppComponent],
