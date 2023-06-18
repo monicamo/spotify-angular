@@ -21,10 +21,16 @@
   <div class="menu-container flex">
     <div class="playlist-titulo">
       PLAYLISTS
+
+      <p > teste</p>
     </div>
 
     <div class="playlist-scroll">
-      <app-botao-menu (click)="botaoClick('Play1')" [selecionado]="menuSelecionado === 'Play1'" [descricao]="'Play #1'">
+      <app-botao-menu 
+        *ngFor="let playlist of playlists" 
+        (click)="botaoClick(playlist.id)" 
+        [selecionado]="menuSelecionado === playlist.id" 
+        [descricao]="playlist.nome">
         <fa-icon [icon]="playlistIcone"></fa-icon>
       </app-botao-menu>
     </div>

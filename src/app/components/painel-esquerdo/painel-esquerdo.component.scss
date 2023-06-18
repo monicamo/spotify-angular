@@ -53,6 +53,12 @@ $h-entre-menus: 10px;
 
 			.playlist-scroll {
 				width: 100%;
+				overflow-y: auto;
+				max-height: 40vh;
+
+				&::-webkit-scrollbar {
+					display: none;
+				}
 
 				* {
 					margin-bottom: $h-entre-menus;

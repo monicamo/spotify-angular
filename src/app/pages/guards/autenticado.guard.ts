@@ -36,12 +36,13 @@ export class AutenticadoGuard implements CanLoad {
       // });
       // // se for async, bloqueia e espera ate a promise ser resolvida
       // const mon = await teste() // mon vai ser true
-
       const usuarioCriado = await this.spotifyService.inicializarUsuario();
       if (usuarioCriado)
         return res(true);
-      else 
+      else {
+        this.naoAutenticado(); // TODO rever
         return res(false);
+      }
     });
   }
 

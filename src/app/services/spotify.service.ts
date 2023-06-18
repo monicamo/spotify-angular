@@ -75,15 +75,16 @@ export class SpotifyService {
     localStorage.setItem("token", token);
 
     // test
-    this.spotify
-      ?.skipToNext()
-      .then((x) => console.log(x))
-      .catch((err) => console.log(err));
+    // this.spotify
+    //   ?.skipToNext()
+    //   .then((x) => console.log(x))
+    //   .catch((err) => console.log(err));
   }
 
-  async buscarPlaylistUsuario(offset = 0, limit: 30): Promise<IPlaylist[]> {
+  async buscarPlaylistUsuario(offset = 0, limit = 50): Promise<IPlaylist[]> {
     const playlists = await this .spotify.getUserPlaylists( this.usuario.id, { offset, limit } );
     // return playlists.items.map(x => SpotifyPlaylistParaPlaylist(x));
+    console.log(playlists)
     return playlists.items.map(SpotifyPlaylistParaPlaylist);
   }
 
