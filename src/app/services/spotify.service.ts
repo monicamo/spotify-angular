@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { SpotifyConfiguration } from "src/environments/environment";
 import Spotify from "spotify-web-api-js";
 import { IUsuario } from "../pages/interfaces/iusuario";
+import { SpotifyUserParaUsuario } from "../common/spotify-helper";
 
 @Injectable({
   providedIn: "root",
@@ -14,31 +15,34 @@ export class SpotifyService {
     this.spotify = new Spotify();
   }
 
-  async inicializarServico() {
+  async inicializarUsuario() {
     if (!!this.usuario) {
       return true;
     }
 
     const token = localStorage.getItem("token");
 
-    if (!!token) return false;
+    if (!token) return false;
 
     try {
+
       this.definirAccessToken(token);
       await this.obterSpotifyUser();
-      return true;
+      return !!this.usuario;
+    
     } catch (error) {
       console.log(error);
       return false;
     }
   }
 
-  async obterSpotifyUser() {
+  private async obterSpotifyUser(): Promise<void> {
     const userInfo = await this.spotify.getMe();
+    this.usuario = SpotifyUserParaUsuario(userInfo);
     console.log(userInfo)
   }
 
-  public obterTokenUrlCallback() {
+  public obterTokenUrlCallback(): string {
     if (!window.location.hash) return "";
 
     const params = window.location.href.substring(1).split("&");
@@ -64,16 +68,19 @@ export class SpotifyService {
   }
 
   public definirAccessToken(token: string) {
+
     this.spotify?.setAccessToken(token);
+    
     localStorage.setItem("token", token);
-    console.log(token);
+
+    // test
     this.spotify
       ?.skipToNext()
       .then((x) => console.log(x))
       .catch((err) => console.log(err));
-    this.getElvis();
   }
 
+  // nao usado ainda
   getElvis() {
     const teste = this.spotify.getAccessToken();
     console.log(teste);

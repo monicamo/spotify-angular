@@ -43,3 +43,28 @@ Finalmente para todas as rotas funcionarem, em app.component.html precisamos col
 <router-outlet> e seus imports
 
 
+## Comando
+
+Site : https://queuesite-2cd6b.web.app/login
+
+# Firebase packeges
+
+
+npm install firebase @angular/fire
+
+npm install firebase
+
+npm install -g firebase-tools
+
+firebase login
+
+firebase init
+
+# Configurar o projeto Angulat to host firebase
+
+firebase init hosting
+
+# deploy do site 
+firebase deploy --only hosting
+
+

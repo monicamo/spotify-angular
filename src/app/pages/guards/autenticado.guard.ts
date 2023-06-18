@@ -20,13 +20,24 @@ export class AutenticadoGuard implements CanLoad {
     | Promise<boolean | UrlTree> {
 
     const token = localStorage.getItem("token");
-    
+  
     if (!token) {
       return this.naoAutenticado();
     }
     
     return new Promise( (res) => {
-      const usuarioCriado = this.spotifyService.inicializarServico();
+      // const teste = new Promise( (res) => {
+      //   setTimeout(() => {
+      //     res(true);
+      //   }, 5000);
+      // });
+      // teste.then(x => {
+      //   console.log(x);  // é o retorno true da linha 32
+      // });
+      // // se for async, bloqueia e espera ate a promise ser resolvida
+      // const mon = await teste() // mon vai ser true
+
+      const usuarioCriado = this.spotifyService.inicializarUsuario();
       if (usuarioCriado)
         return res(true);
       else 
