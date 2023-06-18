@@ -3,7 +3,7 @@ export const environment = {
 };
 
 export const SpotifyConfiguration = {
-  clientId : '5bb43be7de21403997aca806bb3b339a',
+  clientId : '',
   authEndpoint: 'https://accounts.spotify.com/authorize',
   redirectUrl: 'https://queuesite-2cd6b.web.app/login/',
   scopes: [
