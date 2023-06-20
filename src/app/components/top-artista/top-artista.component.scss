@@ -1,0 +1,10 @@
+@import 'variaveis';
+
+.card {
+  height: 200px;
+
+    span {
+        color: $preto-transparent-70;
+        text-shadow: 2px 2px 10px $branco;
+    }
+}
