@@ -108,6 +108,11 @@ export class SpotifyService {
     this.router.navigate(['login']);
   }
 
+  async executarMusica(musicaID: string) {
+    await this.spotify.queue(musicaID);
+    await this.spotify.skipToNext();
+  }
+
   // nao usado ainda
   getElvis() {
     const teste = this.spotify.getAccessToken();

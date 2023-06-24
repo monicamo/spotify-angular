@@ -27,4 +27,8 @@ export class HomeComponent implements OnInit {
   obterArtistas(musica: IMusica) {
     return musica.artistas.map(artista => artista.nome).join(', ');
   }
+
+  executarMusica(musica: IMusica) {
+    this.spotifyService.executarMusica(musica.id);
+  }
 }
