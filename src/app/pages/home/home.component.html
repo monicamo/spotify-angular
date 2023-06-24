@@ -4,8 +4,30 @@
     </div>
 
     <app-top-artista class="mt-2 d-block"></app-top-artista>
+    <div class="titulo-bg mt-4">
+        Músicas Curtidas
+    </div>
 
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Título</th>
+                <th>Artista</th>
+                <th>Tempo</th>
+                <th>Album</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let musica of musicas">
+                <td> <fa-icon class="play" [icon]="playIcone"></fa-icon> </td>
+                <td>{{ musica.titulo }}</td>
+                <td>{{ obterArtistas(musica) }}</td>
+                <td>{{ musica.tempo }}</td>
+                <td>{{ musica.album.nome }}</td>
+
+            </tr>
+        </tbody>
+    </table>
 </div>
-<div class="painel-direito">
-ss
-</div>
+<app-painel-direito  class="painel-direito"></app-painel-direito>

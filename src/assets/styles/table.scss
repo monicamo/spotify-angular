@@ -1,0 +1,13 @@
+@import 'variaveis';
+
+.table {
+    width: 100%;
+    text-align: left;
+    table-layout: fixed;
+    border-collapse: separate;
+
+    .play {
+        color: $cor-primaria;
+        font-size: .5rem;
+    }
+}
