@@ -113,6 +113,11 @@ export class SpotifyService {
     await this.spotify.skipToNext();
   }
 
+  async obterMusicaAtual(): Promise<IMusica> {
+    const musicaAtual = this.spotify.getMyCurrentPlayingTrack();
+    return SpotifyTrackParaMusica((await musicaAtual).item);
+  }
+
   // nao usado ainda
   getElvis() {
     const teste = this.spotify.getAccessToken();

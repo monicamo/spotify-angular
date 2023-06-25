@@ -1,8 +1,22 @@
-@import 'table.scss';
+@import 'table';
+@import 'variaveis';
 
 :host {
   display: flex;
   justify-content: space-between;
+
+  ::-webkit-scrollbar {
+    width: 7px;
+    
+    &-thumb {
+      background-color: rgba($cor-primaria, $alpha: 0.2);
+      border-radius: 10px;
+    }
+
+    &-track {
+      background-color: transparent;
+    }
+  }
 
   .minhas-musicas {
     padding: 0 50px;
