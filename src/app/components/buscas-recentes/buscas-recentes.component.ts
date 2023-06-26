@@ -9,8 +9,6 @@ export class BuscasRecentesComponent {
   public campoPesquisa = "";
 
   public pesquisasRecentes: string[] = [
-    'Blondie',
-    'Duran',
     'Top Global',
     'Top Brasil',
     'Esquenta Sertanejo',
