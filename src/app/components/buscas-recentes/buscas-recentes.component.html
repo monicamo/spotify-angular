@@ -1,0 +1,6 @@
+<input (keyup.Enter)="buscar()" type="text" name="" id="" placeholder="Artistas, Músicas, Playlists" [(ngModel)]="campoPesquisa">
+<div class="sugestoes flex">
+    <span 
+        (click)="definirPesquisa(pesquisa)" 
+        *ngFor="let pesquisa of pesquisasRecentes">{{ pesquisa }}</span>
+</div>
