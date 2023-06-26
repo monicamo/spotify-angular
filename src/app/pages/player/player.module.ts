@@ -14,6 +14,7 @@ import { PainelDireitoComponent } from 'src/app/components/painel-direito/painel
 import { BuscasRecentesComponent } from 'src/app/components/buscas-recentes/buscas-recentes.component';
 import { TopArtistasComponent } from 'src/app/components/top-artistas/top-artistas.component';
 import { ArtistaItemImagemComponent } from 'src/app/components/artista-item-imagem/artista-item-imagem.component';
+import { PlayerCardComponent } from 'src/app/components/player-card/player-card.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ArtistaItemImagemComponent } from 'src/app/components/artista-item-imag
     TopArtistaComponent,
     PainelDireitoComponent,
     TopArtistasComponent,
-    ArtistaItemImagemComponent
+    ArtistaItemImagemComponent,
+    PlayerCardComponent
   ],
   imports: [
     CommonModule,
