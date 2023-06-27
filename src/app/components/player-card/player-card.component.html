@@ -1,1 +1,10 @@
-<p>player-card works!</p>
+<div class="container card p-10">
+  <div class="image" [style.background-image]="'url(' + musica.album.imagemUrl + ')'"></div>
+  <div class="controles">
+    <span>{{musica.titulo}}</span>
+    <div class="botoes">
+        <fa-icon (click)="voltarMusica()" [icon]="anteriorIcone"></fa-icon>
+        <fa-icon (click)="proximaMusica()" [icon]="proximoIcone"></fa-icon>
+    </div>
+  </div>
+</div>

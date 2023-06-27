@@ -118,6 +118,14 @@ export class SpotifyService {
     return SpotifyTrackParaMusica((await musicaAtual).item);
   }
 
+  async voltarMusica() {
+    await this.spotify.skipToPrevious();
+  }
+
+  async proximaMusica() {
+    await this.spotify.skipToNext();
+  }
+
   // nao usado ainda
   getElvis() {
     const teste = this.spotify.getAccessToken();

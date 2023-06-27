@@ -18,7 +18,7 @@ export class TopArtistasComponent implements OnInit {
   }
 
   async buscarTopArtistas() {
-    this.artistas = await this.spotifyService.buscarTopArtistas(8);
+    this.artistas = await this.spotifyService.buscarTopArtistas(3);
   }
 
 
