@@ -34,6 +34,7 @@ export class PainelEsquerdoComponent implements OnInit {
 
   async buscarPlaylist() {
     this.playlists = await this.spotifyService.buscarPlaylistUsuario();
+    console.log(this.playlists)
   }
 
 }

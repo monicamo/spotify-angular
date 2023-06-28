@@ -4,6 +4,7 @@ import { IMusica } from '../interfaces/imusica';
 import { newMusica } from 'src/app/common/factories';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
+import { SpotifyService } from 'src/app/services/spotify.service';
 
 @Component({
   selector: 'app-lista-musicas',
@@ -20,7 +21,7 @@ export class ListaMusicasComponent implements OnInit, OnDestroy {
   playIcone = faPlay;
   subsRoute: Subscription[] = [];
 
-  constructor(private activedRoute: ActivatedRoute) {}
+  constructor(private activedRoute: ActivatedRoute, private spotifyService: SpotifyService) {}
 
   ngOnInit(): void {
     this.obterMusicas();
@@ -42,6 +43,8 @@ export class ListaMusicasComponent implements OnInit, OnDestroy {
   }
 
   async obterDadosDaPagina(tipo: string, id: string) {
+    console.log(tipo)
+    console.log(id)
     if (tipo === 'playlist')
       await this.obterDadosPlaylist(id);
     else if (tipo === "artista")
@@ -49,7 +52,14 @@ export class ListaMusicasComponent implements OnInit, OnDestroy {
   }
 
   async obterDadosPlaylist(playlistId: string) {
+    console.log(playlistId)
+    const playlistMusicas = await this.spotifyService.buscarMusicasPlaylist(playlistId);
+    this.musicas = playlistMusicas.musicas;
 
+    console.log(playlistMusicas)
+
+    this.bannerImagemUrl = playlistMusicas.imagemUrl;
+    this.bannerTexto = playlistMusicas.nome;
   }
 
   async obterDadosArtista(artistaId: string) {

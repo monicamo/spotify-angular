@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { SpotifyConfiguration } from "src/environments/environment";
 import Spotify from "spotify-web-api-js";
 import { IUsuario } from "../pages/interfaces/iusuario";
-import { SpotifyArtistaParaArtista, SpotifyPlaylistParaPlaylist, SpotifyTrackParaMusica, SpotifyUserParaUsuario } from "../common/spotify-helper";
+import { SpotifyArtistaParaArtista, SpotifyPlaylistParaPlaylist, SpotifySinglePlaylistParaPlaylist, SpotifyTrackParaMusica, SpotifyUserParaUsuario } from "../common/spotify-helper";
 import { IPlaylist } from "../pages/interfaces/iplaylist";
 import { Router } from "@angular/router";
 import { IArtista } from "../pages/interfaces/iartista";
@@ -101,6 +101,26 @@ export class SpotifyService {
     const musicas = await this.spotify.getMySavedTracks({ offset, limit });
     console.log(musicas);
     return musicas.items.map(x => SpotifyTrackParaMusica(x.track));
+  }
+
+  async buscarMusicasPlaylist(playlistId: string, offset = 0, limit = 50): Promise<IPlaylist> {
+    const playlistSpotify = await this.spotify.getPlaylist(playlistId);
+
+    console.log(playlistSpotify);
+
+    if (!playlistSpotify)
+      return null;
+
+      console.log(playlistSpotify);
+
+
+    const playlist = SpotifySinglePlaylistParaPlaylist(playlistSpotify);
+
+    const musicasSpotify = await this.spotify.getPlaylistTracks(playlistId, { offset, limit });
+
+    playlist.musicas = musicasSpotify.items.map(musica => SpotifyTrackParaMusica(musica.track as SpotifyApi.TrackObjectFull ))
+  
+    return playlist;
   }
     
   logout() {
