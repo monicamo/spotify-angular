@@ -5,7 +5,8 @@ export function newArtista(): IArtista {
     return {
         id: '',
         nome: '',
-        imagemUrl: ''
+        imagemUrl: '',
+        musicas: []
     }
 }
 
