@@ -5,6 +5,7 @@ import { newMusica } from 'src/app/common/factories';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
 import { SpotifyService } from 'src/app/services/spotify.service';
+import { PlayerService } from 'src/app/services/player.service';
 
 @Component({
   selector: 'app-lista-musicas',
@@ -16,19 +17,31 @@ export class ListaMusicasComponent implements OnInit, OnDestroy {
   bannerImagemUrl = '';
   bannerTexto = '';
 
+  titulo = '';
+
   musicas: IMusica[];
   musicaAtual: IMusica = newMusica();
   playIcone = faPlay;
   subsRoute: Subscription[] = [];
 
-  constructor(private activedRoute: ActivatedRoute, private spotifyService: SpotifyService) {}
+
+  constructor(private playerService: PlayerService, private activedRoute: ActivatedRoute, private spotifyService: SpotifyService) {}
 
   ngOnInit(): void {
     this.obterMusicas();
+    this.obterMusicaAtual();
   }
 
   ngOnDestroy(): void {
     this.subsRoute.forEach( sub => sub.unsubscribe() );
+  }
+
+  obterMusicaAtual() {
+    const sub = this.playerService.musicaAtual.subscribe(musica => {
+      this.musicaAtual = musica;
+    });
+
+    this.subsRoute.push(sub);
   }
 
   obterMusicas() {
@@ -40,6 +53,10 @@ export class ListaMusicasComponent implements OnInit, OnDestroy {
     });
 
     this.subsRoute.push(subRoute);
+  }
+
+  obterArtistas(musica: IMusica) {
+    return musica.artistas.map(artista => artista.nome).join(', ');
   }
 
   async obterDadosDaPagina(tipo: string, id: string) {
@@ -56,11 +73,19 @@ export class ListaMusicasComponent implements OnInit, OnDestroy {
     console.log(playlistMusicas)
     
     this.definirDadosPagina(playlistMusicas.nome, playlistMusicas.imagemUrl, playlistMusicas.musicas);
+    this.titulo = 'Músicas Playlist: ' + playlistMusicas.nome;
   }
 
   async obterDadosArtista(artistaId: string) {
 
   }
+
+  
+  executarMusica(musica: IMusica) {
+    this.spotifyService.executarMusica(musica.id);
+    this.playerService.definirMusicalAtual(musica);
+  }
+
 
   definirDadosPagina(bannerTexto: string, bannerImage: string, musicas: IMusica[]) {
     this.bannerImagemUrl = bannerImage;
