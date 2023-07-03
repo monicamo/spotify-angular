@@ -52,18 +52,20 @@ export class ListaMusicasComponent implements OnInit, OnDestroy {
   }
 
   async obterDadosPlaylist(playlistId: string) {
-    console.log(playlistId)
     const playlistMusicas = await this.spotifyService.buscarMusicasPlaylist(playlistId);
-    this.musicas = playlistMusicas.musicas;
-
     console.log(playlistMusicas)
-
-    this.bannerImagemUrl = playlistMusicas.imagemUrl;
-    this.bannerTexto = playlistMusicas.nome;
+    
+    this.definirDadosPagina(playlistMusicas.nome, playlistMusicas.imagemUrl, playlistMusicas.musicas);
   }
 
   async obterDadosArtista(artistaId: string) {
 
+  }
+
+  definirDadosPagina(bannerTexto: string, bannerImage: string, musicas: IMusica[]) {
+    this.bannerImagemUrl = bannerImage;
+    this.bannerTexto = bannerTexto;
+    this.musicas = musicas;
   }
 
 }

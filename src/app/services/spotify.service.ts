@@ -111,15 +111,14 @@ export class SpotifyService {
     if (!playlistSpotify)
       return null;
 
-      console.log(playlistSpotify);
-
-
+    console.log(playlistSpotify);
     const playlist = SpotifySinglePlaylistParaPlaylist(playlistSpotify);
 
     const musicasSpotify = await this.spotify.getPlaylistTracks(playlistId, { offset, limit });
 
     playlist.musicas = musicasSpotify.items.map(musica => SpotifyTrackParaMusica(musica.track as SpotifyApi.TrackObjectFull ))
   
+    console.log(playlist);
     return playlist;
   }
     

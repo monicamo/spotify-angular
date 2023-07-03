@@ -26,7 +26,6 @@ export function SpotifySinglePlaylistParaPlaylist(playlist: SpotifyApi.SinglePla
   }
 }
 
-
 export function SpotifyPlaylistParaPlaylist(playlist: SpotifyApi.PlaylistObjectSimplified): IPlaylist {
   return {
     id: playlist.id,
